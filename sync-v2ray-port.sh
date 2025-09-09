@@ -19,7 +19,7 @@ fi
 echo "✅ 远程服务器端口: $REMOTE_PORT_VALUE"
 
 # 备份本地配置文件
-cp "$CONFIG_FILE" "${CONFIG_FILE}.bak.$(date +%F-%H%M%S)"
+#cp "$CONFIG_FILE" "${CONFIG_FILE}.bak.$(date +%F-%H%M%S)"
 
 # 修改本地配置文件中的端口
 sed -i -E "s/\"port\"\s*:\s*[0-9]+/\"port\": ${REMOTE_PORT_VALUE}/" "$CONFIG_FILE"
