@@ -8,9 +8,10 @@ REMOTE_SSH_PORT=22
 CONFIG_FILE="/etc/v2ray/config.json"
 # =========================
 
-# 获取远程端口
-REMOTE_CMD="v2ray info | grep '端口' | awk -F'=' '{print \$2}' | tr -d ' '"
+# 获取远程端口。需要使用sed去除颜色代码
+REMOTE_CMD="v2ray info | grep '端口' | awk -F'=' '{print \$2}' | tr -d ' ' | sed 's/\x1b\[[0-9;]*m//g'"
 REMOTE_PORT_VALUE=$(ssh -p ${REMOTE_SSH_PORT} -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "${REMOTE_CMD}")
+
 
 if [[ -z "$REMOTE_PORT_VALUE" ]]; then
   echo "❌ 获取远程端口失败"
